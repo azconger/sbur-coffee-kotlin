@@ -1,4 +1,4 @@
-package com.zconger.sburcoffee
+package com.zconger.sburcoffeekotlin
 
 import org.springframework.web.bind.annotation.*
 
@@ -25,8 +25,9 @@ class RestApiDemoController {
         return coffee
     }
 
-//    @PutMapping(value = ["/coffees/{id}"])
-//    fun coffeePut(@PathVariable id: String, @RequestBody coffee: Coffee): Coffee {
-//
-//    }
+    @PutMapping(value = ["/coffees/{id}"])
+    fun coffeePut(@PathVariable id: String, @RequestBody coffee: Coffee): List<Coffee> {
+        coffees.add(coffee)
+        return coffees.filter { it.id == id }
+    }
 }

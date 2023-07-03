@@ -1,1 +1,1 @@
-rootProject.name = "sbur-coffee"
+rootProject.name = "SburCoffeeKotlin"
