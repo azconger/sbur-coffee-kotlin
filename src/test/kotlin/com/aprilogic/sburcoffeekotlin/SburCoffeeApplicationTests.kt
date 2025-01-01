@@ -1,4 +1,4 @@
-package com.zconger.sburcoffeekotlin
+package com.aprilogic.sburcoffeekotlin
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test

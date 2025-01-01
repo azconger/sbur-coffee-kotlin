@@ -1,0 +1,38 @@
+app:
+  applicationId: 7390c57e-64e9-4418-b705-6ab7bfbffc40
+  env: ${APP_ENV:Development}
+  host: ${APP_HOST:http://localhost:8080}
+  openApiConf:
+    path: /api-docs
+#  antiCsrfParam: "_csrf"
+#  authentication:
+#    loggedInIndicator: "HTTP/[0-9]+.[0-9]+\\s+([2-3][0-9][0-9])"
+#    loggedOutIndicator: "HTTP/[0-9]+.[0-9]+\\s+(4[0-9][0-9])"
+#    usernamePassword:
+#      type: JSON
+#      loginPath: /api/jwt/auth/signin
+#      usernameField: username
+#      passwordField: password
+#      scanUsername: "janesmith"
+#      scanPassword: "${APP_PASSWORD:password}"
+#    tokenAuthorization:
+#      type: HEADER
+#      value: Authorization
+#      tokenType: Bearer
+#    tokenExtraction:
+#      type: TOKEN_PATH
+#      value: "token"
+#    testPath:
+#      path: /api/jwt/items/search/i
+#      success: "HTTP.*200.*"
+
+hawk:
+  failureThreshold: high
+  spider:
+    base: false
+
+tags:
+  - name: _STACKHAWK_GIT_COMMIT_SHA
+    value: ${COMMIT_SHA}
+  - name: _STACKHAWK_GIT_BRANCH
+    value: ${BRANCH_NAME}

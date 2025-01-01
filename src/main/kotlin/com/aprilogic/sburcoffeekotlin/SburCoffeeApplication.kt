@@ -1,4 +1,4 @@
-package com.zconger.sburcoffeekotlin
+package com.aprilogic.sburcoffeekotlin
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
