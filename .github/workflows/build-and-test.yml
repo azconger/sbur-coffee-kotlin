@@ -1,0 +1,49 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      packages: read
+      actions: read
+      contents: read
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
+    - name: Build app
+      run: ./gradlew clean build
+    - name: Run unit tests
+      run: ./gradlew test
+    - name: Run app
+      run: java -jar build/libs/SburCoffeeKotlin-0.0.1-SNAPSHOT.jar &
+    - name: Run HawkScan
+      env:
+        HAWK_ENV: GitHub Actions
+        COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
+        BRANCH_NAME: ${{ github.head_ref }}
+        NO_COLOR: true
+        NO_PROGRESS: true
+        SARIF_ARTIFACT: true
+      continue-on-error: true
+      uses: stackhawk/hawkscan-action@v2
+      with:
+        apiKey: ${{ secrets.HAWK_API_KEY }}
+        githubToken: ${{ github.token }}
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: stackhawk.sarif
+        category: StackHawk
